@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  username String? @unique
+  firstName  String?
+  lastName  String?
+  hash String?
+  role Role @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model GameServer {
+  id    Int     @id @default(autoincrement())
+  name  String
+  ipAddress String
+  queryPort Int @default(15777)
+  beaconPort Int @default(15001)
+  gamePort Int @default(7000)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  enableStatusCheck Boolean @default(true)
+  responseTimeInMsec String?
+  serverState String?
+  serverVersion String?
+}

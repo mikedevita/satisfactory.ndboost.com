@@ -1,0 +1,16 @@
+version: '3'
+services: 
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 33006:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: passw0rd!
+      MYSQL_DATABASE: web_dev
+      MYSQL_USER: web_dba
+      MYSQL_PASSWORD: Passw0rd!
+
+volumes:
+  mysql_data:
